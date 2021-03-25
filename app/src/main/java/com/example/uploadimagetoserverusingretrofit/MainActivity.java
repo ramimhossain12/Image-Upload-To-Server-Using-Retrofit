@@ -8,10 +8,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +45,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, IMG_REQUEST);
             }
         });
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadImage();
+            }
+        });
+    }
+
+    private void uploadImage() {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,75,byteArrayOutputStream);
+
+        byte[] imageInByte = byteArrayOutputStream.toByteArray();
+        String encodedImage =  Base64.encodeToString(imageInByte,Base64.DEFAULT);
+
+
     }
 
     @Override
