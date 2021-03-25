@@ -12,9 +12,14 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,6 +65,26 @@ public class MainActivity extends AppCompatActivity {
 
         byte[] imageInByte = byteArrayOutputStream.toByteArray();
         String encodedImage =  Base64.encodeToString(imageInByte,Base64.DEFAULT);
+
+        Call<ResrponseModel> call = Client.getInstance().getApi().uploadImage(encodedImage);
+
+        call.enqueue(new Callback<ResrponseModel>() {
+            @Override
+            public void onResponse(Call<ResrponseModel> call, Response<ResrponseModel> response) {
+                Toast.makeText(MainActivity.this, response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+                if(response.body().isStatus()){
+
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResrponseModel> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Network Failed", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
     }

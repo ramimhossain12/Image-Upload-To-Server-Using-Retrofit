@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 public interface Api {
 
     @FormUrlEncoded
-    @POST("")
+    @POST("upload_image.php")
     Call<ResrponseModel> uploadImage(
 
          @Field("EN_IMAGE") String encodeImage

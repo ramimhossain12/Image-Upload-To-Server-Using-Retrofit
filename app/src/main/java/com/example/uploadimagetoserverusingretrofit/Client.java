@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
-    private  static  final String BASE__URL = "";
+    private  static  final String BASE__URL = "http://192.168.0.104/php/Imageuplod/";
     private static Client myClient;
     private Retrofit retrofit;
 
